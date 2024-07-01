@@ -4,18 +4,35 @@ import { Layout, Menu } from 'antd';
 
 const { Header, Content, Footer, Sider } = Layout;
 
-const items = [UserOutlined, VideoCameraOutlined, UploadOutlined, UserOutlined].map(
-    (icon, index) => ({
-        key: String(index + 1),
-        icon: React.createElement(icon),
-        label: `nav ${index + 1}`,
-    }),
-);
+const items = [
+    {
+        key: '1',
+        label: 'Dashboard'
+    },
+    {
+        key: '2',
+        label: 'Profile'
+    },
+    {
+        key: '3',
+        label: 'User Management',
+        children: [
+            {
+                key: '11',
+                label: 'Label Admin'
+            },
+            {
+                key: '12',
+                label: 'Label Broh'
+            },
+        ]
+    },
+]
 
 const MainLayout = () => {
     return (
         <div>
-            <Layout>
+            <Layout style={{ height: '100vh' }}>
                 <Sider
                     breakpoint="lg"
                     collapsedWidth="0"
@@ -26,7 +43,16 @@ const MainLayout = () => {
                         console.log(collapsed, type);
                     }}
                 >
-                    <div className="demo-logo-vertical" />
+                    <div style={{
+                        color: '#fff',
+                        textAlign: 'center',
+                        height: '4em',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center'
+                    }} >
+                        <h1>Super Charge</h1>
+                    </div>
                     <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']} items={items} />
                 </Sider>
                 <Layout>
