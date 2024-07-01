@@ -1,8 +1,10 @@
+import MainLayout from "./components/layout/MainLayout"
+
 function App() {
 
   return (
     <>
-      <h1>Vite + React</h1>
+      <MainLayout />
     </>
   )
 }
