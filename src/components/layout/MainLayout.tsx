@@ -2,33 +2,9 @@ import React from 'react';
 import { UploadOutlined, UserOutlined, VideoCameraOutlined } from '@ant-design/icons';
 import { Layout, Menu } from 'antd';
 import { Outlet } from 'react-router-dom';
+import { adminSidebarItems } from '../../routes/admin.routes';
 
 const { Header, Content, Footer, Sider } = Layout;
-
-const items = [
-    {
-        key: '1',
-        label: 'Dashboard'
-    },
-    {
-        key: '2',
-        label: 'Profile'
-    },
-    {
-        key: '3',
-        label: 'User Management',
-        children: [
-            {
-                key: '11',
-                label: 'Label Admin'
-            },
-            {
-                key: '12',
-                label: 'Label Broh'
-            },
-        ]
-    },
-]
 
 const MainLayout = () => {
     return (
@@ -54,7 +30,7 @@ const MainLayout = () => {
                     }} >
                         <h1>Super Charge</h1>
                     </div>
-                    <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']} items={items} />
+                    <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']} items={adminSidebarItems} />
                 </Sider>
                 <Layout>
                     <Header style={{ padding: 0 }} />
