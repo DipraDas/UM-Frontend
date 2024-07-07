@@ -7,6 +7,7 @@ import { setUser, TUser } from '../redux/features/auth/authSlice';
 import { verifyToken } from '../utils/verifyToken';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
+import PhForm from '../components/form/PhForm';
 
 const Login = () => {
 
@@ -23,30 +24,31 @@ const Login = () => {
     const [login] = useLoginMutation();
 
     const onSubmit = async (data: FieldValues) => {
-        const toastId = toast.loading('Logging in');
-        try {
-            const userInfo = {
-                id: data.userId,
-                password: data.password
-            }
-            const res = await login(userInfo).unwrap();
-            const user = verifyToken(res.data.accessToken) as TUser;
-            dispatch(setUser({
-                user: user,
-                token: res.data.accessToken
-            }))
-            toast.success('Logged in', { id: toastId, duration: 2000 });
-            navigate(`/${user.role}/dashboard`);
-            console.log('data---', res)
-        } catch (err) {
-            toast.error('Something went wrong.', { id: toastId, duration: 2000 })
-        }
+        console.log('Data--', data);
+        // const toastId = toast.loading('Logging in');
+        // try {
+        //     const userInfo = {
+        //         id: data.userId,
+        //         password: data.password
+        //     }
+        //     const res = await login(userInfo).unwrap();
+        //     const user = verifyToken(res.data.accessToken) as TUser;
+        //     dispatch(setUser({
+        //         user: user,
+        //         token: res.data.accessToken
+        //     }))
+        //     toast.success('Logged in', { id: toastId, duration: 2000 });
+        //     navigate(`/${user.role}/dashboard`);
+        //     console.log('data---', res)
+        // } catch (err) {
+        //     toast.error('Something went wrong.', { id: toastId, duration: 2000 })
+        // }
     }
 
     return (
         <div>
             <h1>Login</h1>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <PhForm onSubmit={onSubmit}>
                 <div>
                     <label
                         htmlFor="id">
@@ -72,7 +74,7 @@ const Login = () => {
                 <Button htmlType='submit'>
                     Login
                 </Button>
-            </form>
+            </PhForm>
         </div>
     );
 };
