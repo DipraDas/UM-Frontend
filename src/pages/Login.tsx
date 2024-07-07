@@ -26,24 +26,24 @@ const Login = () => {
 
     const onSubmit = async (data: FieldValues) => {
         console.log('Data--', data);
-        // const toastId = toast.loading('Logging in');
-        // try {
-        //     const userInfo = {
-        //         id: data.userId,
-        //         password: data.password
-        //     }
-        //     const res = await login(userInfo).unwrap();
-        //     const user = verifyToken(res.data.accessToken) as TUser;
-        //     dispatch(setUser({
-        //         user: user,
-        //         token: res.data.accessToken
-        //     }))
-        //     toast.success('Logged in', { id: toastId, duration: 2000 });
-        //     navigate(`/${user.role}/dashboard`);
-        //     console.log('data---', res)
-        // } catch (err) {
-        //     toast.error('Something went wrong.', { id: toastId, duration: 2000 })
-        // }
+        const toastId = toast.loading('Logging in');
+        try {
+            const userInfo = {
+                id: data.userId,
+                password: data.password
+            }
+            const res = await login(userInfo).unwrap();
+            const user = verifyToken(res.data.accessToken) as TUser;
+            dispatch(setUser({
+                user: user,
+                token: res.data.accessToken
+            }))
+            toast.success('Logged in', { id: toastId, duration: 2000 });
+            navigate(`/${user.role}/dashboard`);
+            console.log('data---', res)
+        } catch (err) {
+            toast.error('Something went wrong.', { id: toastId, duration: 2000 })
+        }
     }
 
     return (
@@ -51,17 +51,11 @@ const Login = () => {
             <h1>Login</h1>
             <PhForm onSubmit={onSubmit}>
                 <div>
-                    <label
-                        htmlFor="id">
-                        ID :
-                    </label>
+
                     <PhInput type='text' name='userId' label='User Id' />
                 </div>
                 <div>
-                    <label
-                        htmlFor="password">
-                        PASSWORD :
-                    </label>
+
                     <PhInput type='text' name='password' label='Password' />
                 </div>
                 <Button htmlType='submit'>
