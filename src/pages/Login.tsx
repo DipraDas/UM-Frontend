@@ -22,6 +22,11 @@ const Login = () => {
     //     }
     // });
 
+    const defaultValues = {
+        userId: 'A-0001',
+        password: 'admin123'
+    }
+
     const [login] = useLoginMutation();
 
     const onSubmit = async (data: FieldValues) => {
@@ -32,6 +37,7 @@ const Login = () => {
                 id: data.userId,
                 password: data.password
             }
+            console.log('>', data);
             const res = await login(userInfo).unwrap();
             const user = verifyToken(res.data.accessToken) as TUser;
             dispatch(setUser({
@@ -42,7 +48,7 @@ const Login = () => {
             navigate(`/${user.role}/dashboard`);
             console.log('data---', res)
         } catch (err) {
-            toast.error('Something went wrong.', { id: toastId, duration: 2000 })
+            toast.error('Something went wrongrrrr.', { id: toastId, duration: 2000 })
         }
     }
 

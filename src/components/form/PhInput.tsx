@@ -2,7 +2,13 @@ import { Input } from 'antd';
 import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 
-const PhInput = ({ type, name, label }) => {
+type TInputProps = {
+    type: string;
+    name: string;
+    label?: string
+}
+
+const PhInput = ({ type, name, label }: TInputProps) => {
     return (
         <>
             {label ? label : null}
