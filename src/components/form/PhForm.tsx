@@ -11,7 +11,6 @@ type TFormConfig = {
     defaultValues?: Record<string, any>;
 }
 
-
 const PhForm = ({ onSubmit, children, defaultValues }: TFormProps) => {
 
     const formConfig: TFormConfig = {};
