@@ -3,13 +3,40 @@ import PhForm from "../../../components/form/PhForm";
 import { Button, Col, Flex } from "antd";
 import PhSelect from "../../../components/form/PhSelect";
 
+const nameOption = [
+    {
+        value: '01',
+        label: 'Autumn'
+    },
+    {
+        value: '02',
+        label: 'Summer'
+    },
+    {
+        value: '03',
+        label: 'Fall'
+    },
+]
+
+const currentYear = new Date().getFullYear();
+
+const yearOptions = [0, 1, 2, 3, 4].map((number) => ({
+    value: String(currentYear + number),
+    lable: String(currentYear + number)
+}))
+
+console.log(yearOptions);
+
 const CreateAcademicSemester = () => {
 
     const onSubmit: SubmitHandler<FieldValues> = data => {
+        const name = nameOption[Number(data?.name) - 1]?.label;
         const semesterData = {
-            name: "Some",
-            code: "Some",
+            name,
+            code: data.name,
+            year: data.year
         }
+        console.log('>', semesterData);
     }
 
     return (
@@ -17,7 +44,10 @@ const CreateAcademicSemester = () => {
             <Col span={6}>
                 <PhForm onSubmit={onSubmit}>
                     {/* <PhInput type="text" name="name" label="Name" /> */}
-                    <PhSelect label="Name" name="name" />
+                    <PhSelect label="Name" name="name" options={nameOption} />
+                    <PhSelect label="Year" name="year" options={yearOptions} />
+                    <PhSelect label="Start Month" name="startMonth" />
+                    <PhSelect label="End Month" name="endMonth" />
                     <Button htmlType="submit">Submit</Button>
                 </PhForm>
             </Col>

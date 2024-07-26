@@ -1,6 +1,5 @@
 import { Form, Input } from 'antd';
-import React from 'react';
-import { Controller, useFormContext } from 'react-hook-form';
+import { Controller } from 'react-hook-form';
 
 type TInputProps = {
     type: string;
@@ -18,12 +17,12 @@ const PhInput = ({ type, name, label }: TInputProps) => {
                             {...field}
                             type={type}
                             id={name}
+                            size='large'
                         />
                     </Form.Item>
                 }
             />
         </>
-
     )
 };
 
