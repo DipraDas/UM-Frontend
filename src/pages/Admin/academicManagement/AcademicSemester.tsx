@@ -1,15 +1,13 @@
-import { Table, TableColumnsType } from "antd";
+import { Table, TableColumnsType, TableProps } from "antd";
 import { useGetAllSemestersQuery } from "../../../redux/features/admin/academicManagement.api";
+import { TAcademicSemester } from "../../../types/academicManagement.type";
 
-interface DataType {
-    key: React.Key;
-    name: string;
-    age: number;
-    address: string;
-}
+export type TTableData = Pick<TAcademicSemester,
+    "_id" | "name" | "year" | "startMonth" | "endMonth"
+>
 
 const AcademicSemester = () => {
-    const columns: TableColumnsType<DataType> = [
+    const columns: TableColumnsType<TTableData> = [
         {
             title: 'Name',
             dataIndex: 'name',
@@ -52,7 +50,14 @@ const AcademicSemester = () => {
             dataIndex: 'endMonth'
         },
     ];
-    const { data: SemesterData } = useGetAllSemestersQuery(undefined);
+
+
+    const onChange: TableProps<TTableData>['onChange'] = (pagination, filters, sorter, extra) => {
+        console.log('params', pagination, filters, sorter, extra);
+    };
+    const { data: SemesterData } = useGetAllSemestersQuery([
+        { name: 'name', value: 'Autumn' }
+    ]);
     const tableData = SemesterData?.data?.map(({ _id, name, startMonth, endMonth, year }) => ({
         _id,
         name,
@@ -67,6 +72,7 @@ const AcademicSemester = () => {
             <Table
                 columns={columns}
                 dataSource={tableData}
+                onChange={onChange}
                 showSorterTooltip={{ target: 'sorter-icon' }}
             />
         </div>
